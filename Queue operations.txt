@@ -1,0 +1,117 @@
+ //Queue operations
+#include<iostream>
+#define max 10
+using namespace std;
+class Queue{
+    int front,rear;
+    string q[max];
+    public:
+    Queue()
+    {
+        front=rear==-1;
+    }
+    int isfull();
+    int isempty();
+    void addEvent();
+    void nextEvent();
+    void display();
+    void cancel();
+};
+int Queue::isfull()
+{
+if(rear=max-1)
+return 1;
+else
+return 0;
+}
+int Queue::isempty()
+{
+    if(front==-1 && rear==-1)
+    return 1;
+    else
+    return 0;
+}
+void Queue::addEvent()
+{
+    string event;
+    cout<<"Enter a event";
+    cin>>event;
+    if(isfull())
+    cout<<"Queue is full";
+    else{
+        if(front==-1)
+        front=0;
+        rear=rear+1;
+        q[rear]=event;
+        cout<<event<<"is inserted";
+    }
+}
+void Queue::nextEvent()
+{
+    if(isempty())
+    cout<<"Queue is empty";
+    else{
+    string temp;
+        temp=q[front];
+        front=front+1;
+        cout<<temp<<"is deleted";
+    }
+}
+void Queue::display()
+{
+    for(int i=front;i<=rear;i++)
+    cout<<q[i]<<"  ";
+}
+void Queue::cancel()
+{
+    string event;
+    if(isempty())
+    cout<<"no event is present";
+    else{
+        cout<<"Enter the event you want to cancel";
+        cin>>event;
+        for(int i=front;i<=rear;i++)
+        {
+            if(event==q[i])
+            {
+                for(int j=i;j<=rear;j++)
+                {
+                    q[j]=q[j+1];
+                    rear=rear+1;
+                
+                }
+                cout<<event<<"Event has canceled";
+            }
+        }
+    }
+}
+int main()
+{
+    Queue q1;
+    int ch;
+    while(1)
+    {
+        cout<<"/n1.Menus/n2.Add Event/n3.Next Event/n4.Display Event/n5.Cancel Event/n6.Exit";
+       int ch=("Enter your choice");
+       cin>>ch;
+       switch(ch)
+       {
+        case 1:
+        q1.addEvent();
+        break;
+        case 2:
+        q1.nextEvent();
+        break;
+        case 3:
+        q1.display();
+        break;
+        case 4:
+        q1.cancel();
+        break;
+        case 5:
+        exit(0);
+        break;
+       }
+
+    }
+}

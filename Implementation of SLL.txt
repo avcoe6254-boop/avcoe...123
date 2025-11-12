@@ -1,0 +1,158 @@
+ Implementation of SLL 
+#include<iostream>
+using namespace std;
+struct node{
+    int roll_no;
+    string name;
+    float marks;
+    node *next;
+};
+class SLL{
+    node *head;
+    public:
+    void create();
+    void disp();
+    void search();
+    void update();
+    void delnode();
+    void bubble();
+    SLL()
+    {
+        head=NULL;
+    }
+};
+void SLL::create()
+{
+node *nn,*last;
+nn = new node;
+cout<<"Enter the roll_no to be searched";
+cin>>nn->roll_no;
+cout<<"Enter the name";
+cin>>nn->name;
+cout<<"Enter the marks";
+cin>>nn->marks;
+
+nn->next=NULL;
+if(head==NULL)
+{
+    head=nn;
+    last=nn;
+}
+
+else
+{
+    last->next=nn;
+    last=nn;
+}
+}
+void SLL::disp()
+{
+    node *temp;
+    temp=head;
+    while(temp!=NULL)
+    {
+        cout<<temp->roll_no<<"  ";
+        temp = temp->next;
+    }
+}
+void SLL::search()
+{
+    node *temp;
+    int x;
+    cout<<"which roll_no is to be searched?";
+    cin>>x;
+    for(temp=head;temp!=NULL;temp=temp->next)
+    {
+        if(x==temp->roll_no)
+        {
+            cout<<x<<"is present in linked list";
+            break;
+        }
+    }
+}
+void SLL::update()
+{
+    node *temp;
+    int x;
+    cout<<"Enter roll number of which record is to be updated?";
+    cin>>x;
+    for(temp=head;temp!=NULL;temp=temp->next)
+    {
+        if(x==temp->roll_no)
+        {
+            cout<<"Enter updated name and marks";
+            cin>>temp->name>>temp->marks;
+            cout<<x<<"record is updated";
+            break;
+        }
+    }
+}
+void SLL::delnode()
+{
+    node *temp ,*prev;
+    int val;
+    temp = head;
+    prev = NULL;
+    if(head==NULL)
+    cout<<"linklist is empty";
+    else{
+        cout<<"Which roll_no you want to delete?";
+        cin>>val;
+        while(temp!=NULL and temp->roll_no!=val)
+        {
+            prev =temp;
+            temp = temp->next;
+        }
+            prev->next=temp->next;
+            delete(temp);
+    }
+}
+void SLL::bubble()
+{
+    for(node *i=head;i!=NULL;i=i->next)
+    {
+        for(node *j=i->next;j!=NULL;j=j->next)
+        {
+            if(i->roll_no > j->roll_no)
+            {
+                swap(i->roll_no,j->roll_no);
+                swap(i->name,j->name);
+                swap(i->marks,j->marks);
+            }
+        }
+    }
+}
+int main(){
+    SLL s1;
+    int ch;
+    while(1)
+    {
+        cout<<"\nMenus \n1.create \n2.display \n3.search \n4.update \n5.delete \n6.bubble\n7.exit";
+        cout<<"Enter your choice";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            s1.create();
+            break;
+            case 2:
+            s1.disp();
+            break;
+            case 3:
+            s1.search();
+            break;
+            case 4:
+            s1.update();
+            break;
+            case 5:
+            s1.delnode();
+            break;
+            case 6:
+            s1.bubble();
+            break;
+            case 7:
+            exit(0);
+            break;
+        }
+    }
+}

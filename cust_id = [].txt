@@ -1,0 +1,31 @@
+cust_id = []
+
+# Function for Linear Search
+def linear_search(cust_id, target):
+    for i in range(len(cust_id)):
+        if target == cust_id[i]:
+            return i
+    return -1
+
+# Taking number of customers
+n = int(input("How many customers?: "))
+
+# Taking customer IDs
+for i in range(n):
+    id = input("Enter the cust ID: ")
+    if id in cust_id:
+        print("Customer ID already exists.")
+    else:
+        cust_id.append(id)
+
+# Asking for target ID (after entering all IDs)
+target = input("Enter the ID to be searched: ")
+
+# Searching using Linear Search
+ind = linear_search(cust_id, target)
+
+# Displaying result
+if ind == -1:
+    print("ID does not exist.")
+else:
+    print(f"{target} is present at index {ind}.")

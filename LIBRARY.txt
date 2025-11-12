@@ -1,0 +1,128 @@
+member_records = {}
+book_records = {}
+
+def add_member():
+    name = input("Enter your name: ")
+    if name in member_records:
+        print("\nMember already exists!\n")
+        return
+    
+    count = int(input("Enter number of books borrowed by member {name}: "))
+    member_records[name] = count
+    
+    for i in range(count):
+        book = input(f"Enter book #{i + 1} name: ")
+        
+        if book in book_records:
+            book_records[book] += 1
+        else:
+            book_records[book] = 1
+    
+    print("\nMember added successfully!\n")
+    return
+
+def average():
+    if not member_records:
+        print("\nNo members available.\n")
+        return
+    
+    total = 0
+    for val in member_records.values():
+        total += val
+    
+    avg = total / len(member_records)
+    print(f"\nAverage number of books borrowed: {avg:.2f}\n")
+
+
+def HigHlow_Freq():
+    if not book_records:
+        print("\nNo book data available.\n")
+        return
+
+    high = -1
+    low = 9999
+    
+    high_book = ""
+    low_book = ""
+    
+    for book, count in book_records.items():
+        if count > high:
+            high = count
+            high_book = book
+        
+        if count < low:
+            low = count
+            low_book = book
+    
+    print(f"\nMost borrowed book: {high_book} ({high} times)")
+    print(f"Least borrowed book: {low_book} ({low} times)\n")
+
+
+def count_0():
+    count = 0
+    for val in member_records.values():
+        if val == 0:
+            count += 1
+    
+    print(f"\nNumber of members borrowed 0 books: {count}\n")
+
+
+def Most_Frequent():
+    if not book_records:
+        print("\nNo book data available.\n")
+        return
+    
+    freq = {}
+    for val in book_records.values():
+        if val in freq:
+            freq[val] += 1
+        else:
+            freq[val] = 1
+            
+    max_freq = -1
+    mode_val = -1
+    
+    for val, freq_val in freq.items():
+        if freq_val > max_freq:
+            max_freq = freq_val
+            mode_val = val
+            
+    print(f"\nMost frequently borrowed count is {mode_val} times.\n")
+    
+    print("Books borrowed that many times:")
+    for book in book_records:
+        if book_records[book] == mode_val:
+            print(f"  {book}")
+    print()
+
+
+def exit_program():
+    pass # This function is a placeholder based on the original structure
+
+# Main Menu Loop
+while True:
+    print("PYTHON Library Management System")
+    print("(1) Add member and borrowed books")
+    print("(2) Compute avg books borrowed")
+    print("(3) Find highest and lowest borrowed book")
+    print("(4) Count members with 0 books")
+    print("(5) Most frequent borrowed book count")
+    print("(6) Exit")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == '1':
+        add_member()
+    elif choice == '2':
+        average()
+    elif choice == '3':
+        HigHlow_Freq()
+    elif choice == '4':
+        count_0()
+    elif choice == '5':
+        Most_Frequent()
+    elif choice == '6':
+        print("\nExiting program")
+        break
+    else:
+        print("\nInvalid choice. Please try again.\n")

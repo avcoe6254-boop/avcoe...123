@@ -1,0 +1,120 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>  // for exit()
+using namespace std;
+
+#define MAX 10
+
+class stack {
+    string stk[MAX];
+    int top;
+
+public:
+    stack() {
+        top = -1;
+    }
+
+    int isfull();
+    int isempty();
+    void push(string val);
+    string pop();
+    void display();
+};
+
+int stack::isfull() {
+    return (top == MAX - 1);
+}
+
+int stack::isempty() {
+    return (top == -1);
+}
+
+void stack::push(string val) {
+    if (isfull()) {
+        cout << "Stack is full\n";
+    } else {
+        top++;
+        stk[top] = val;
+        cout << val << " is pushed\n";
+    }
+}
+
+string stack::pop() {
+    if (isempty()) {
+        cout << "Stack is empty\n";
+        return "";
+    } else {
+        string temp = stk[top];
+        cout << stk[top] << " is popped\n";
+        top--;
+        return temp;
+    }
+}
+
+void stack::display() {
+    if (isempty()) {
+        cout << "Stack is empty\n";
+        return;
+    }
+    cout << "Stack elements:\n";
+    for (int i = top; i >= 0; i--) {
+        cout << stk[i] << endl;
+    }
+}
+
+int main() {
+    stack s1, s2; // s1 for main stack, s2 for redo stack
+    int ch;
+    string str;
+
+    while (1) {
+        cout << "\n1. Make a Change\n2. Undo\n3. Redo\n4. Display\n5. Exit";
+        cout << "\nEnter choice: ";
+        cin >> ch;
+
+        switch (ch) {
+            case 1: {
+                cout << "Enter the String: ";
+                cin >> str;
+                s1.push(str);
+                // whenever new change happens, redo stack cleared
+                s2 = stack();
+                break;
+            }
+
+            case 2: {
+                if (s1.isempty())
+                    cout << "Nothing to Undo\n";
+                else {
+                    string s = s1.pop();
+                    s2.push(s);
+                    cout << "Undone: " << s << endl;
+                }
+                break;
+            }
+
+            case 3: {
+                if (s2.isempty())
+                    cout << "Nothing to Redo\n";
+                else {
+                    string s = s2.pop();
+                    s1.push(s);
+                    cout << "Redone: " << s << endl;
+                }
+                break;
+            }
+
+            case 4:
+                cout << "\nCurrent Stack:\n";
+                s1.display();
+                break;
+
+            case 5:
+                exit(0);
+
+            default:
+                cout << "Invalid choice\n";
+        }
+    }
+    return 0;
+}

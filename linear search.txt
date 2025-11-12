@@ -1,0 +1,18 @@
+custid=[]
+def linear_searched(custid,target:)
+    for i in range (len(custid)):
+        if(target==custid[i])
+            return i
+n=int(input("how many costomers?"))
+for i in range(n):
+    id=input("enter cust.id")
+    if id in custid:
+        print("cust.id is alresdy exists")
+    else:
+        custid.append(id)
+target=input("enter the id to be searched")
+ind=linear_searched(custid,target)  
+if (ind==1):
+    print("id os not present") 
+else:
+    print(f"{target}is present in index{ind}")             

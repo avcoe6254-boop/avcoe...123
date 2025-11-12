@@ -1,0 +1,114 @@
+//Implementation of linear probing.
+#include<iostream>
+using namespace std;
+struct node{
+    int data;
+    node *next;
+};
+class HashTable{
+    node *ht[10];
+    public:
+    HashTable()
+    {
+        for(int i=0;i<10;i++)
+            ht[i]=NULL;
+    }
+    int HashFun(int);
+    void insert();
+    void search();
+    void del();
+    void display();
+};
+int HashTable::HashFun(int data)
+{
+    return(data%10);
+}
+void HashTable::insert()
+{
+node *nn,*last;
+int ind;
+nn=new node;
+cout<<"Enter the number to be inserted in Hash Table";
+    cin>>nn->data;
+    ind = HashFun(nn->data);
+    if(ht[ind]==NULL)
+    {
+        ht[ind]=last=nn;
+    }
+    else{
+        last->next=nn;
+        last=nn;
+    }
+}
+void HashTable::display()
+{
+    for(int i=0;i<10;i++)
+    cout<<ht[i]<<" ";
+}
+void HashTable::del()
+{
+node *temp,*prev,*nn;
+node *ht[10];
+nn=new node;
+temp=ht[10];
+prev=NULL;
+int ind,data;
+cout<<"which no you want to delete";
+cin>>nn->data;
+ind = HashFun(nn->data);
+if(ht[ind]==NULL)
+{
+ht[data]=0;
+cout<<"no is deleted successfully";
+}
+else{
+    cout<<"no not found in hash table";
+}
+}
+void HashTable::search()
+{
+    node *temp;
+    int x,ind;
+    cout<<"which no you want to search?";
+    cin>>x;
+    for(temp=ht[ind];temp!=NULL;temp=temp->next)
+    {
+        if(x==temp->data)
+        {
+        cout<<"The number"<<x<<"is present in the hash table";
+        return;
+    } 
+    cout<<"The number is not present";
+    }
+    
+}            
+int main()
+{
+    HashTable h1;
+    int ch;
+    while(true)
+    {
+        cout<<"\n Menus \n1.insert \n2.search \n3.delete \n4.display \n5.exit";
+        cout<<"Enter your choice";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            h1.insert();
+            break;
+            case 2:
+            h1.search();
+            break;
+            case 3:
+            h1.del();
+            break;
+            case 4:
+            h1.display();
+            break;
+            case 5:
+            exit(0);
+            break;
+
+        }
+    }
+}

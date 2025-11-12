@@ -1,0 +1,139 @@
+ #include<iostream>
+#define MAX 10
+using namespace std;
+
+class Queue
+{
+    int front, rear;
+    string q[MAX];
+
+public:
+    Queue()
+    {
+        front = rear = -1;
+    }
+
+    int isFull();
+    int isEmpty();
+    void addEvent();
+    void processEvent();
+    void display();
+    void cancel();
+};
+
+int Queue::isFull()
+{
+    if (rear == MAX - 1)
+        return 1;
+    else
+        return 0;
+}
+
+int Queue::isEmpty()
+{
+    if (front == -1 || front > rear)
+        return 1;
+    else
+        return 0;
+}
+
+void Queue::addEvent()
+{
+    if (isFull())
+        cout << "Queue is full\n";
+    else
+    {
+        string nm;
+        cout << "Enter event name: ";
+        cin >> nm;
+        if (front == -1)
+            front = 0;
+        rear++;
+        q[rear] = nm;
+        cout << nm << " is added\n";
+    }
+}
+
+void Queue::processEvent()
+{
+    if (isEmpty())
+        cout << "Queue is empty\n";
+    else
+    {
+        string s = q[front];
+        front++;
+        cout << s << " is processed\n";
+        if (front > rear)
+            front = rear = -1;
+    }
+}
+
+void Queue::display()
+{
+    if (isEmpty())
+        cout << "Queue is empty\n";
+    else
+    {
+        cout << "Events in queue are:\n";
+        for (int i = front; i <= rear; i++)
+            cout << q[i] << endl;
+    }
+}
+
+void Queue::cancel()
+{
+    if (isEmpty())
+        cout << "Queue is empty\n";
+    else
+    {
+        string temp;
+        int found = -1;
+        cout << "Enter event to cancel: ";
+        cin >> temp;
+        for (int i = front; i <= rear; i++)
+        {
+            if (q[i] == temp)
+            {
+                found = i;
+                break;
+            }
+        }
+        if (found == -1)
+            cout << temp << " not found\n";
+        else
+        {
+            for (int i = found; i < rear; i++)
+                q[i] = q[i + 1];
+            rear--;
+            cout << temp << " is cancelled\n";
+            if (rear < front)
+                front = rear = -1;
+        }
+    }
+}
+
+int main()
+{
+    Queue q;
+    int ch;
+    do
+    {
+        cout << "\n1.Add Event\n2.Process Event\n3.Display\n4.Cancel\n5.Exit\n";
+        cout << "Enter your choice: ";
+        cin >> ch;
+        switch (ch)
+        {
+            case 1: q.addEvent(); break;
+            case 2: q.processEvent(); break;
+            case 3: q.display(); break;
+            case 4: q.cancel(); break;
+            case 5: cout << "Exit\n"; break;
+            default: cout << "Invalid choice\n";
+        }
+    } while (ch != 5);
+    return 0;
+}
+[9:01 PM, 11/7/2025] sayalipadekar45: #include <iostream>
+#include <string>
+#include <cstdlib>  // for exit()
+using namespace std;

@@ -1,0 +1,45 @@
+cust_id = []
+
+# Function for Binary Search
+def binary_search(cust_id, target):
+    low = 0
+    high = len(cust_id) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if cust_id[mid] == target:
+            return mid
+        elif cust_id[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
+
+# Taking number of customers
+n = int(input("How many customers?: "))
+
+# Taking customer IDs
+for i in range(n):
+    id = input("Enter the cust ID: ")
+    if id in cust_id:
+        print("Customer ID already exists.")
+    else:
+        cust_id.append(id)
+
+# Sort the list for binary search
+cust_id.sort()
+print("Sorted Customer IDs:", cust_id)
+
+# Asking for target ID
+target = input("Enter the ID to be searched: ")
+
+# Searching using binary search
+index = binary_search(cust_id, target)
+
+# Displaying result
+if index == -1:
+    print("ID does not exist.")
+else:
+    print(f"{target} is present at index {index}.")

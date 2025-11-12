@@ -1,0 +1,30 @@
+: salary=[]
+def bubble (salary):
+    n=len(salary)
+    for i in range (n):
+        for j in range (0,n-i-1):
+            if (salary[i]>salary[j+1]):
+                salary [j],salary[j+1]==salary[j+1],salary[j]
+    print("Bubble sort:",salary)
+def selection (salary):
+    n=len(salary)
+    for i in range (n-1):
+        for j in range (i+1,n):
+            min=j
+            salary[i],salary[min]=salary[min],salary[i]
+    print("Selection sort:",salary)
+n=int(input("how many employees are there?:"))
+for i in range (n):
+    sal= float(input("Enter the salary of employee:"))
+    sal=salary.append(sal)              
+print("\nsalaries after selection sort(accending):",salary)
+print ("Top 5 salaries:",sorted(salary,reverse=True)[:5])
+while (True):
+    print("\nMenus\n1.bubble sort\n2.selection sort\n3. exit")
+    ch=int(input("enter your chioice"))    
+if(ch==1):
+    bubble (salary)
+elif(ch==2):    
+    selection (salary)
+else:
+    print("invalid cho
